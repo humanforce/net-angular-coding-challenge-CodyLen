@@ -1,0 +1,9 @@
+<div class="card border-success mb-3 card-container" style="max-width: 20rem;">
+  <div class="card-header bg-transparent border-success">{{ticket.id}} - {{ ticket.status}}</div>
+  <div class="card-body text-success">
+    <h5 class="card-title">{{ ticket.customFieldName }}</h5>
+    <p class="card-text">{{ ticket.projectName }}.</p>
+     <p class="card-text">{{ startDate }} -- {{ endDate }}</p>
+  </div>
+  <div class="card-footer bg-transparent border-success">Priority: {{ ticket.priority }} </div>
+</div>

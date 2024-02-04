@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+
+  <ItemGroup>
+    <ProjectReference Include="..\HumanForce.Domain\HumanForce.Domain.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+    <ProjectReference Include="..\HumanForce.Services\HumanForce.Services.csproj">
+      <GlobalPropertiesToRemove></GlobalPropertiesToRemove>
+    </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <None Remove="Controllers\UserController\" />
+    <None Remove="Controllers\CalendarController\" />
+    <None Remove="Controllers\JiraTicketController\" />
+    <None Remove="Newtonsoft.Json" />
+    <None Remove="Resources\" />
+    <None Remove="Microsoft.AspNetCore.Mvc.NewtonsoftJson" />
+    <None Remove="Controllers\JiraTicketsController\Models\" />
+    <None Remove="Controllers\CalendarController\Models\" />
+    <None Remove="Middlewares\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Controllers\UsersController\" />
+    <Folder Include="Controllers\CalendarController\" />
+    <Folder Include="Controllers\JiraTicketsController\" />
+    <Folder Include="Resources\" />
+    <Folder Include="Controllers\JiraTicketsController\Models\" />
+    <Folder Include="Controllers\CalendarController\Models\" />
+    <Folder Include="Middlewares\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Remove="Resources\australian.json" />
+    <Content Remove="Resources\backlog.json" />
+    <Content Remove="Resources\pakistan.json" />
+    <Content Remove="Resources\philippines.json" />
+    <Content Remove="Resources\sprints.json" />
+    <Content Remove="Resources\TeamMembers.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\australian.json" />
+    <None Include="Resources\backlog.json" />
+    <None Include="Resources\pakistan.json" />
+    <None Include="Resources\philippines.json" />
+    <None Include="Resources\sprints.json" />
+    <None Include="Resources\TeamMembers.json" />
+  </ItemGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.32" />
+  </ItemGroup>
+</Project>

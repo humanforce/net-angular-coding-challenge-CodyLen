@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using System.Linq;
 using HumanForce.Api.Controllers.JiraTicketsController.Models;
-using HumanForce.Domain.Consts;
-using HumanForce.Domain.Enums;
 using HumanForce.Domain.Model.Jira;
 using HumanForce.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
@@ -50,53 +48,18 @@ namespace HumanForce.Api.Controllers.JiraTicketsController
 
         private int getTeamVelocityPoints(int sprintId)
         {
-            var sprint = GetSprintById(sprintId);
-            var sprints = GetPastThreeSprintsConst(sprint.Name);
+            var sprints = GetPastThreeSprints(sprintId);
             var total = 0;
             var issues = JiraTicketService.GetTickets().Issues;
             foreach(var issue in issues)
             {
-                if (sprints.Contains(issue.Fields.Customfield_10020[0].Name))
+                if (sprints.Count == 3 && sprints.Contains(issue.Fields.Customfield_10020[0].Name))
                 {
                     total += Convert.ToInt32(issue.Fields.Customfield_10016.Split('.')[0]);
                 }
             }
 
             return total;
-        }
-
-        private List<string> GetPastThreeSprintsConst(string sprint)
-        {
-            if (sprint == SprintConsts.SCRUMSprint4)
-            {
-                return new List<string> { SprintConsts.SCRUMSprint1, SprintConsts.SCRUMSprint2, SprintConsts.SCRUMSprint3 };
-            }
-            else if (sprint == SprintConsts.SCRUMSprint5)
-            {
-                return new List<string> { SprintConsts.SCRUMSprint2, SprintConsts.SCRUMSprint3, SprintConsts.SCRUMSprint4 };
-            }
-            else if (sprint == SprintConsts.SCRUMSprint6)
-            {
-                return new List<string> { SprintConsts.SCRUMSprint3, SprintConsts.SCRUMSprint4, SprintConsts.SCRUMSprint5 };
-            }
-            else if (sprint == SprintConsts.SCRUMSprint7)
-            {
-                return new List<string> { SprintConsts.SCRUMSprint4, SprintConsts.SCRUMSprint5, SprintConsts.SCRUMSprint6 };
-            }
-            else if (sprint == SprintConsts.SCRUMSprint8)
-            {
-                return new List<string> { SprintConsts.SCRUMSprint5, SprintConsts.SCRUMSprint6, SprintConsts.SCRUMSprint7 };
-            }
-            else if (sprint == SprintConsts.SCRUMSprint9)
-            {
-                return new List<string> { SprintConsts.SCRUMSprint6, SprintConsts.SCRUMSprint7, SprintConsts.SCRUMSprint8 };
-            }
-            else if (sprint == SprintConsts.SCRUMSprint10)
-            {
-                return new List<string> { SprintConsts.SCRUMSprint7, SprintConsts.SCRUMSprint8, SprintConsts.SCRUMSprint9 };
-            }
-
-            return null;
         }
 
         private int getTeamCapacityBySprintId(int sprintId)
@@ -141,6 +104,14 @@ namespace HumanForce.Api.Controllers.JiraTicketsController
                   EndDate = DateTime.Parse(x.EndDate).ToLocalTime(),
             }).SingleOrDefault();
             return sprint;
+        }
+
+        private List<string> GetPastThreeSprints(int sprintId)
+        {
+            var result = new List<string>();
+            var sprint = JiraTicketService.GetSprints().Values.Where(v => v.Id < sprintId).TakeLast(3).ToList();
+            sprint.ForEach(x => result.Add(x.Name));
+            return result;
         }
 
     }

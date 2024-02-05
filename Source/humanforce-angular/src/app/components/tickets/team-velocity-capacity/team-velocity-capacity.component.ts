@@ -12,7 +12,7 @@ export class TeamVelocityCapacityComponent {
   velocity: number;
   capacity: number;
   @Input() sprintId: number;
-  
+
   constructor(private ticketService: TicketService){}
 
   ngOnInit(): void {
@@ -22,6 +22,8 @@ export class TeamVelocityCapacityComponent {
     this.getTeamCapacity();
     if (this.sprintId >= 4) {
        this.getTeamVelocity();
+    } else {
+      this.velocity = 0;
     }
   }
 

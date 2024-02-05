@@ -1,6 +1,5 @@
 import { ChangeDetectionStrategy, ChangeDetectorRef, Component, Input } from '@angular/core';
 import { Chart, registerables } from 'chart.js';
-import { SprintModel } from '../models/sprint-model';
 
 @Component({
   selector: 'app-bar-chart',

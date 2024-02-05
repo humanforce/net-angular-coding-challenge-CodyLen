@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using HumanForce.Domain.Model.Jira;
 using HumanForce.Domain.Services;
 using Newtonsoft.Json;
@@ -10,9 +11,12 @@ namespace HumanForce.Services
 {
     public class JiraTicketService : IJiraTicketService
     {
-        public IEnumerable<Sprint> GetSprints()
+        public SprintList GetSprints()
         {
-            throw new NotImplementedException();
+            var sprintJson = @"Resources/sprints.json";
+            var jsonResult = File.ReadAllText(sprintJson);
+            var result = JsonConvert.DeserializeObject<SprintList>(jsonResult);
+            return result;
         }
 
         public Ticket GetTickets()

@@ -7,6 +7,6 @@ namespace HumanForce.Domain.Services
     public interface IJiraTicketService
     {
         Ticket GetTickets();
-        IEnumerable<Sprint> GetSprints();
+        SprintList GetSprints();
     }
 }

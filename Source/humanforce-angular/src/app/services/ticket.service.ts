@@ -15,15 +15,15 @@ export class TicketService {
   constructor(private http: HttpClient) {
   }
 
-  getTeamVelocityPast3Sprints(sprint: string): Observable<number> {
-    return this.http.get<number>(this.baseApiUrl + `/jiratickets/getvelocitypast3sprints?sprint=${sprint}`);
+  getTeamVelocityPast3Sprints(sprintId: number): Observable<number> {
+    return this.http.get<number>(this.baseApiUrl + `/jiratickets/getvelocity?sprintId=${sprintId}`);
   }
 
-  getTeamCapacityBySprint(sprint: string): Observable<number> {
-    return this.http.get<number>(this.baseApiUrl + `/jiratickets/getcapacitybysprint?sprint=${sprint}`);
+  getTeamCapacityBySprint(sprintId: number): Observable<number> {
+    return this.http.get<number>(this.baseApiUrl + `/jiratickets/getcapacity?sprintId=${sprintId}`);
   }
 
-  getTicketsBySprint(sprint: string): Observable<TicketModel[]> {
-    return this.http.get<TicketModel[]>(this.baseApiUrl + `/jiratickets/gettickets?sprint=${sprint}`);
+  getTicketsBySprint(sprintId: number): Observable<TicketModel[]> {
+    return this.http.get<TicketModel[]>(this.baseApiUrl + `/jiratickets/gettickets?sprintId=${sprintId}`);
   }
 }

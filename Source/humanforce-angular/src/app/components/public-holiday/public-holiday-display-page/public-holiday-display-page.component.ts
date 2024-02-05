@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { CalendarService } from 'src/app/services/calendar.service';
 import { Country } from 'src/app/shared/enums/country';
@@ -11,19 +11,25 @@ import { PublicHoliday } from '../models/public-holiday';
 })
 export class PublicHolidayDisplayPageComponent implements OnInit {
   holidays: PublicHoliday[];
-  subcription: Subscription[] = [];
+  subscription: Subscription[] = [];
+  @Input() sprintId: number;
 
   constructor(private calendarService: CalendarService){}
 
   ngOnInit(): void {
-    this.getPublicHoldayByCountry(Country.Australia);
+  }
+
+   ngOnChanges() {
+    if(this.sprintId) {
+      this.getPublicHolidaysBySprintId(this.sprintId);
+    }
   }
 
   ngOnDestroy() {
-    this.subcription.forEach(s => s.unsubscribe());
+    this.subscription.forEach(s => s.unsubscribe());
   }
 
-  getPublicHoldayByCountry(country: Country) {
-    this.subcription.push(this.calendarService.getPublicHolidays(country).subscribe(x => this.holidays = x));
+  getPublicHolidaysBySprintId(sprintId: number) {
+    this.subscription.push(this.calendarService.getPublicHolidays(sprintId).subscribe(x => this.holidays = x));
   }
 }

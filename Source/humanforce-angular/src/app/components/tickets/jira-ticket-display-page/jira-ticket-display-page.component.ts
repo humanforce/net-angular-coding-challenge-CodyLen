@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input, SimpleChange } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { TicketService } from 'src/app/services/ticket.service';
 import { TicketModel } from '../models/ticket-model';
@@ -9,23 +9,26 @@ import { TicketModel } from '../models/ticket-model';
   styleUrls: ['./jira-ticket-display-page.component.css']
 })
 export class JiraTicketDisplayPageComponent {
-  subcription: Subscription[] = [];
+  @Input() sprintId: number;
+  subscription: Subscription[] = [];
   tickets: TicketModel[];
-  sprint = "SCRUM Sprint 10" //temp set up for now. in the future it should be dynamic variable taking from outside.
   constructor(private ticketService: TicketService){}
 
   ngOnInit(): void {
-    this.getTeamCapacity();
+
+  }
+
+  ngOnChanges(changes: SimpleChange) {
+    this.getTickets();
   }
 
   ngOnDestroy() {
-    this.subcription.forEach(s => s.unsubscribe());
+    this.subscription.forEach(s => s.unsubscribe());
   }
 
-  getTeamCapacity() {
-
-    this.subcription.push(this.ticketService.getTicketsBySprint(this.sprint).subscribe(x => {
-      this.tickets = x
+  getTickets() {
+    this.subscription.push(this.ticketService.getTicketsBySprint(this.sprintId).subscribe(x => {
+      this.tickets = x;
     }));
   }
 }

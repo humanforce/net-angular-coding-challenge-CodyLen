@@ -14,11 +14,17 @@ export class BarChartComponent {
 
 chart: any;
 
-  constructor(private cd: ChangeDetectorRef) {
+constructor(private cd: ChangeDetectorRef) {
     Chart.register(...registerables);
   }
 
-  ngOnInit(): void {
+ngOnInit(): void {
+}
+
+ngOnChanges() {
+    if(this.chart) {
+      this.chart.destroy();
+    }
     this.createChart();
   }
 

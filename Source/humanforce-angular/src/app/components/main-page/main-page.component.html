@@ -1,10 +1,26 @@
-<mat-radio-group aria-label="Select an option">
-  <mat-radio-button value="1">Sprint 1</mat-radio-button>
-  <mat-radio-button value="2">Sprint 2</mat-radio-button>
-  <mat-radio-button value="1">Sprint 3</mat-radio-button>
-  <mat-radio-button value="2">Sprint 4</mat-radio-button>
-  <mat-radio-button value="1">Sprint 5</mat-radio-button>
-  <mat-radio-button value="2">Sprint 6</mat-radio-button>
-  <mat-radio-button value="2">Sprint 7</mat-radio-button>
-  <mat-radio-button value="2">Sprint 8</mat-radio-button>
-</mat-radio-group>
+<div [formGroup]="form">
+  <mat-radio-group aria-label="Select an option" formControlName="radio">
+    <mat-radio-button *ngFor="let sprint of sprints" [value]="sprint.value">{{
+      sprint.name
+    }}</mat-radio-button>
+  </mat-radio-group>
+</div>
+<mat-divider></mat-divider>
+<div *ngIf="sprintId">
+  <div>
+    <div class="ticket-header"><h3>Tickets</h3></div>
+    <app-jira-ticket-display-page
+      [sprintId]="sprintId"
+    ></app-jira-ticket-display-page>
+  </div>
+  <mat-divider></mat-divider>
+  <div>
+    <div class="bar-header"><h3>Team Capacity Vs Velocity</h3></div>
+    <app-team-velocity-capacity [sprintId]="sprintId"></app-team-velocity-capacity>
+  </div>
+    <mat-divider></mat-divider>
+  <div>
+    <div class="bar-header"><h3>Public Holidays</h3></div>
+    <app-public-holiday-display-page [sprintId]="sprintId"></app-public-holiday-display-page>
+  </div>
+</div>

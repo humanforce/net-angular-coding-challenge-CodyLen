@@ -10,6 +10,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { TeamVelocityComponent } from './components/tickets/team-velocity/team-velocity.component';
 import { JiraTicketCardComponent } from './components/tickets/jira-ticket-card/jira-ticket-card.component';
 import { JiraTicketDisplayPageComponent } from './components/tickets/jira-ticket-display-page/jira-ticket-display-page.component';
+import { MainPageComponent } from './components/main-page/main-page.component';
+import {MatRadioModule} from '@angular/material/radio';
 
 @NgModule({
   declarations: [
@@ -20,11 +22,13 @@ import { JiraTicketDisplayPageComponent } from './components/tickets/jira-ticket
     TeamVelocityComponent,
     JiraTicketCardComponent,
     JiraTicketDisplayPageComponent,
+    MainPageComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
+    MatRadioModule
   ],
   providers: [],
   bootstrap: [AppComponent]

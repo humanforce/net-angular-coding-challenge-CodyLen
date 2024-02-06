@@ -1,0 +1,25 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <None Remove="Model\" />
+    <None Remove="Enums\" />
+    <None Remove="Model\User\" />
+    <None Remove="Model\PublicHoliday\" />
+    <None Remove="Model\JiraTicket\" />
+    <None Remove="Services\" />
+    <None Remove="Consts\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Model\" />
+    <Folder Include="Enums\" />
+    <Folder Include="Model\User\" />
+    <Folder Include="Model\PublicHoliday\" />
+    <Folder Include="Model\Jira\" />
+    <Folder Include="Services\" />
+    <Folder Include="Consts\" />
+  </ItemGroup>
+</Project>

@@ -6,5 +6,6 @@ namespace HumanForce.Api.Controllers.CalendarController.Models
         public string Description { get; set; }
         public string Summary { get; set; }
         public string HolidayDate { get; set; }
+        public string DisplayName { get; set; }
     }
 }

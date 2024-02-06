@@ -6,6 +6,8 @@ using HumanForce.Domain.Services;
 using Microsoft.AspNetCore.Mvc;
 using System.Linq;
 using HumanForce.Domain.Model.Jira;
+using Ardalis.GuardClauses;
+using HumanForce.Domain.Model.PublicHoliday;
 
 namespace HumanForce.Api.Controllers.CalendarController
 {
@@ -29,6 +31,7 @@ namespace HumanForce.Api.Controllers.CalendarController
         [HttpGet("getholiday")]
         public IActionResult GetCalendar(Country country)
         {
+            Guard.Against.Null(country);
             var result = getPublicHolidayByCountry(country);
             return Ok(result);
         }
@@ -36,6 +39,7 @@ namespace HumanForce.Api.Controllers.CalendarController
         [HttpGet("getpublicholidays")]
         public IActionResult GetPublicHolidayBySprintId(int sprintId)
         {
+            Guard.Against.NegativeOrZero(sprintId);   
             var result = getPublicHolidayBySprintId(sprintId);
             return Ok(result);
         }
@@ -50,7 +54,8 @@ namespace HumanForce.Api.Controllers.CalendarController
                 {
                     Description = i.Description,
                     Summary = i.Summary,
-                    HolidayDate = i.Start.Date
+                    HolidayDate = i.Start.Date,
+                    DisplayName = i.Creator.DisplayName
                 });
             }
 
@@ -59,6 +64,7 @@ namespace HumanForce.Api.Controllers.CalendarController
 
         private List<PublicHolidayModel> getPublicHolidayBySprintId(int sprintId)
         {
+            Guard.Against.NegativeOrZero(sprintId);
             DateTime startDate;
             DateTime endDate;
             var result = new List<PublicHolidayModel>();
@@ -87,6 +93,7 @@ namespace HumanForce.Api.Controllers.CalendarController
                         HolidayDate = a.Start.Date,
                         Description = a.Description,
                         Summary = a.Summary,
+                        DisplayName = a.Creator.DisplayName
                     });
                 }
 
@@ -103,6 +110,7 @@ namespace HumanForce.Api.Controllers.CalendarController
                         HolidayDate = a.Start.Date,
                         Description = a.Description,
                         Summary = a.Summary,
+                        DisplayName = a.Creator.DisplayName
                     });
                 }
 
@@ -119,6 +127,7 @@ namespace HumanForce.Api.Controllers.CalendarController
                         HolidayDate = a.Start.Date,
                         Description = a.Description,
                         Summary = a.Summary,
+                        DisplayName = a.Creator.DisplayName
                     });
                 }
 
@@ -126,6 +135,5 @@ namespace HumanForce.Api.Controllers.CalendarController
 
             return result;
         }
-
     }
 }

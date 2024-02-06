@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using Ardalis.GuardClauses;
 using HumanForce.Api.Controllers.JiraTicketsController.Models;
 using HumanForce.Domain.Model.Jira;
 using HumanForce.Domain.Services;
@@ -24,6 +25,7 @@ namespace HumanForce.Api.Controllers.JiraTicketsController
         [HttpGet("gettickets")]
         public IActionResult GetJiraTicketsBySprintId(int sprintId)
         {
+            Guard.Against.NegativeOrZero(sprintId);
             var result = GetTicketsBySprintId(sprintId);
             return Ok(result);
         }
@@ -32,7 +34,7 @@ namespace HumanForce.Api.Controllers.JiraTicketsController
         [HttpGet("getvelocity")]
         public IActionResult GetTeamvelocityPast3Sprints(int sprintId)
         {
-
+            Guard.Against.NegativeOrZero(sprintId);
             var total = getTeamVelocityPoints(sprintId);
             var result = Math.Round(total / 3.0, 1);
             return Ok(result);
@@ -41,7 +43,7 @@ namespace HumanForce.Api.Controllers.JiraTicketsController
         [HttpGet("getcapacity")]
         public IActionResult GetTeamCapacityBySprintId(int sprintId)
         {
-
+            Guard.Against.NegativeOrZero(sprintId);
             var result = getTeamCapacityBySprintId(sprintId);
             return Ok(result);
         }

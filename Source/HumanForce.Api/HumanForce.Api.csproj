@@ -23,6 +23,7 @@
     <None Remove="Controllers\JiraTicketsController\Models\" />
     <None Remove="Controllers\CalendarController\Models\" />
     <None Remove="Middlewares\" />
+    <None Remove="Ardalis.GuardClauses" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\UsersController\" />
@@ -51,5 +52,6 @@
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="3.1.32" />
+    <PackageReference Include="Ardalis.GuardClauses" Version="4.4.0" />
   </ItemGroup>
 </Project>

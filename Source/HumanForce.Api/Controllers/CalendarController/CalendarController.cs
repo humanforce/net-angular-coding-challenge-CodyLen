@@ -35,24 +35,6 @@ namespace HumanForce.Api.Controllers.CalendarController
             return Ok(result);
         }
 
-        private List<PublicHolidayModel> getPublicHolidayByCountry(Country coutry)
-        {
-            var result = new List<PublicHolidayModel>();
-            var items = CalendarService.GetPublicHoliday(coutry).Items.ToList();
-            foreach(var i in items)
-            {
-                result.Add(new PublicHolidayModel
-                {
-                    Description = i.Description,
-                    Summary = i.Summary,
-                    HolidayDate = i.Start.Date,
-                    DisplayName = i.Creator.DisplayName
-                });
-            }
-
-            return result;
-        }
-
         private List<PublicHolidayModel> getPublicHolidayBySprintId(int sprintId)
         {
             Guard.Against.NegativeOrZero(sprintId);

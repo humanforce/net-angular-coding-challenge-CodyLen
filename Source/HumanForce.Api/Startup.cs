@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using HumanForce.Api.Handler;
 using HumanForce.Api.Middlewares;
 using HumanForce.Domain.Services;
 using HumanForce.Services;
@@ -30,6 +31,7 @@ namespace HumanForce.Api
         {
             services.AddControllers().AddNewtonsoftJson();
             RegisterServices(services);
+            RegisterHandler(services);
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -61,7 +63,11 @@ namespace HumanForce.Api
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IJiraTicketService, JiraTicketService>();
             services.AddScoped<ICalendarService, CalendarService>();
+        }
 
+        private static void RegisterHandler(IServiceCollection services)
+        {
+            services.AddScoped<ITicketHandler, TicketHandler>();
         }
     }
 }

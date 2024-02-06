@@ -24,6 +24,7 @@
     <None Remove="Controllers\CalendarController\Models\" />
     <None Remove="Middlewares\" />
     <None Remove="Ardalis.GuardClauses" />
+    <None Remove="Handler\" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Controllers\UsersController\" />
@@ -33,6 +34,7 @@
     <Folder Include="Controllers\JiraTicketsController\Models\" />
     <Folder Include="Controllers\CalendarController\Models\" />
     <Folder Include="Middlewares\" />
+    <Folder Include="Handler\" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="Resources\australian.json" />

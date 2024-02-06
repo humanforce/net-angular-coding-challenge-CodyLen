@@ -1,7 +1,7 @@
+<div class="holiday-header" *ngIf="holidays && holidays.length>0"><h3>Public Holidays</h3></div>
 <div class="holiday-container row" *ngFor="let holiday of holidays">
   <div class="col-sm">
       <app-country-public-holiday-card [publicHoliday]="holiday"></app-country-public-holiday-card>
   </div>
-
 </div>
 

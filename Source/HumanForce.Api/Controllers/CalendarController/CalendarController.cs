@@ -81,42 +81,18 @@ namespace HumanForce.Api.Controllers.CalendarController
 
             startDate = sprint.StartDate;
             endDate = sprint.EndDate;
-            
-            foreach (var a in au)
-            {
-                var t = DateTime.Parse(a.Start.Date).ToLocalTime();
-                if (t >= startDate && t <= endDate)
-                {
-                    result.Add(new PublicHolidayModel
-                    {
 
-                        HolidayDate = a.Start.Date,
-                        Description = a.Description,
-                        Summary = a.Summary,
-                        DisplayName = a.Creator.DisplayName
-                    });
-                }
+            result = GetCountryHolidays(au, startDate, endDate);
+            result.AddRange(GetCountryHolidays(pa, startDate, endDate));
+            result.AddRange(GetCountryHolidays(ph, startDate, endDate));
 
-            };
+            return result;
+        }
 
-            foreach (var a in pa)
-            {
-                var t = DateTime.Parse(a.Start.Date).ToLocalTime();
-                if (t >= startDate && t <= endDate)
-                {
-                    result.Add(new PublicHolidayModel
-                    {
-
-                        HolidayDate = a.Start.Date,
-                        Description = a.Description,
-                        Summary = a.Summary,
-                        DisplayName = a.Creator.DisplayName
-                    });
-                }
-
-            };
-
-            foreach (var a in ph)
+        private List<PublicHolidayModel> GetCountryHolidays(List<Item> items, DateTime startDate, DateTime endDate)
+        {
+            var result = new List<PublicHolidayModel>();
+            foreach (var a in items)
             {
                 var t = DateTime.Parse(a.Start.Date).ToLocalTime();
                 if (t >= startDate && t <= endDate)

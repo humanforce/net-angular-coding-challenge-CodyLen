@@ -27,15 +27,6 @@ namespace HumanForce.Api.Controllers.CalendarController
         protected IJiraTicketService JiraTicketService { get; }
         protected IUserService UserService { get; }
 
-
-        [HttpGet("getholiday")]
-        public IActionResult GetCalendar(Country country)
-        {
-            Guard.Against.Null(country);
-            var result = getPublicHolidayByCountry(country);
-            return Ok(result);
-        }
-
         [HttpGet("getpublicholidays")]
         public IActionResult GetPublicHolidayBySprintId(int sprintId)
         {
